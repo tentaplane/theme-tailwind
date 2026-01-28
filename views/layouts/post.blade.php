@@ -6,6 +6,10 @@
 
         @include('tentapress-seo::head', ['post' => $post ?? null, 'page' => $page ?? null])
 
+        @php
+            \Illuminate\Support\Facades\Vite::useHotFile(public_path('themes/tentapress/tailwind/hot'));
+        @endphp
+
         @vite(['resources/css/theme.css', 'resources/js/theme.js'], 'themes/tentapress/tailwind/build')
     </head>
     <body class="bg-green-50 text-zinc-900">
