@@ -2,8 +2,10 @@
     "type": "theme",
     "id": "tentapress/tailwind",
     "name": "Tailwind Theme",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "A Tailwind v4 theme for TentaPress.",
+    "provider": "TentaPress\\Themes\\Tailwind\\TailwindThemeServiceProvider",
+    "provider_path": "src/TailwindThemeServiceProvider.php",
     "layouts": [
         { "key": "default", "label": "Default" },
         { "key": "landing", "label": "Landing" },

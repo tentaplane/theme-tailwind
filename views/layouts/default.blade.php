@@ -6,59 +6,15 @@
 
         @include('tentapress-seo::head', ['page' => $page])
 
-        @php
-            \Illuminate\Support\Facades\Vite::useHotFile(public_path('themes/tentapress/tailwind/hot'));
-        @endphp
-
         @vite(['resources/css/theme.css', 'resources/js/theme.js'], 'themes/tentapress/tailwind/build')
     </head>
     <body class="bg-green-50 text-zinc-900">
-        @php
-            $primaryMenu = isset($tpMenus) ? $tpMenus->itemsForLocation('primary') : [];
-        @endphp
-
         <header class="border-b border-black/10">
             <div class="mx-auto flex max-w-5xl items-center justify-between p-6">
                 <div class="font-semibold">Tailwind Theme - TentaPress</div>
-                <nav class="flex gap-4 text-sm text-black/70">
-                    @if ($primaryMenu !== [])
-                        @foreach ($primaryMenu as $item)
-                            @php
-                                $url = (string) ($item['url'] ?? '#');
-                                $title = (string) ($item['title'] ?? 'Menu');
-                                $target = isset($item['target']) && is_string($item['target']) ? $item['target'] : null;
-                                $children = is_array($item['children'] ?? null) ? $item['children'] : [];
-                            @endphp
-
-                            <div class="flex flex-col gap-1">
-                                <a
-                                    href="{{ $url }}"
-                                    class="hover:underline"
-                                    @if ($target) target="{{ $target }}" rel="noopener" @endif>
-                                    {{ $title }}
-                                </a>
-                                @if ($children !== [])
-                                    <div class="flex flex-wrap gap-3 text-xs text-black/60">
-                                        @foreach ($children as $child)
-                                            @php
-                                                $childUrl = (string) ($child['url'] ?? '#');
-                                                $childTitle = (string) ($child['title'] ?? 'Menu');
-                                                $childTarget = isset($child['target']) && is_string($child['target']) ? $child['target'] : null;
-                                            @endphp
-
-                                            <a
-                                                href="{{ $childUrl }}"
-                                                class="hover:text-black"
-                                                @if ($childTarget) target="{{ $childTarget }}" rel="noopener" @endif>
-                                                {{ $childTitle }}
-                                            </a>
-                                        @endforeach
-                                    </div>
-                                @endif
-                            </div>
-                        @endforeach
-                    @endif
-                </nav>
+                <x-tp-theme::menu location="primary">
+                    <a href="/" class="hover:underline">Home</a>
+                </x-tp-theme::menu>
             </div>
         </header>
 
